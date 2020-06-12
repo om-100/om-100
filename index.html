@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Project</title>
+    <style>
+        .main{
+        text-align:center;
+          background-color: grey;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <img
+            height="100"
+            width="100"
+            id="image"
+>
+<h1 id="full_name">Om Sapkota</h1>
+<p id="bio"></p>
+<p>
+    check me on <a id="link">Github</a>
+</p>
+    <a class="twitter-timeline" data-width="300" data-height="400" data-theme="light" href="https://twitter.com/om100?ref_src=twsrc%5Etfw">Tweets by om100</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <h1>LIST OF MY REPOSITORIES</h1>
+    <a id="repo" >Repositories</a>
+    <h5 id="followers_repo"></h5>
+</div>
+<script>
+    fetch("https://api.github.com/users/om-100")
+    .then(response => response.json())
+    .then(function(data){
+    console.log(data)
+    let repositories_count= data['repos_url']
+    let repoinfo = 'i have ${repositories_count} in my github'
+    document.getElementById('image').src = data['avatar_url']
+    document.getElementById('full_name').textcontent = data['name']
+    document.getElementById('bio').text = data['bio']
+    document.getElementById('repo').href = data['repos_url']
+    document.getElementById('link').href = data['html_url']
+    document.getElementById('followers_repo').textcontent = repositories_count
+
+    })
+</script>
+</body>
+</html>
